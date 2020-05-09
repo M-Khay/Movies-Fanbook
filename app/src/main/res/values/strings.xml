@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Sports Fanbook</string>
+    <string name="search_hint">Search Your Team</string>
+    <string name="empty_team_name">Team Name Cannot Be Empty</string>
+    <string name="invalid_team_name">Invalid Team Name</string>
+    <string name="search">Search</string>
+    <string name="match_history">Match History</string>
+    <string name="team_name_very_long">Golden State Warriors and Los Angeles Laker</string>
+    <string name="team_score_very_long">2002-42</string>
+    <string name="team_vs_text">VS</string>
+
+    <string name="match_history_error">Sorry!</string>
+    <string name="no_match_history_found">We could not retrieve any game history for this team. Please try again later.</string>
+
+    <string name="alert_dialog_ok">OK</string>
+    <string name="alert_dialog_go_back">Go Back</string>
+    <string name="network_error_title">Network Issue</string>
+    <string name="network_error_message">Internet not available, please check your connection.</string>
+
+    <string name="premium_feature_title">Premium Feature!!</string>
+    <string name="premium_feature_message">Coming soon</string>
+
+
+</resources>

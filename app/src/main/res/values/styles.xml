@@ -1,0 +1,81 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- App TextView content -->
+    <style name="TextViewStyle.Content" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+
+    <style name="TextViewStyle.Subcontent" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+
+    <!-- App TextView content inside List. -->
+    <style name="TextViewStyle.Content.List">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:maxWidth">260dp</item>
+        <item name="singleLine">true</item>
+        <item name="android:gravity">bottom|start</item>
+    </style>
+
+    <!-- App TextView caption for List content. -->
+    <style name="TextViewStyle.Subcontent.List">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="singleLine">true</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:maxWidth">240dp</item>
+        <item name="android:gravity">bottom|start</item>
+    </style>
+
+    <style name="SearchButton">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+    </style>
+
+    <style name="PosterImageView">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+
+    </style>
+
+    <style name="ListCardStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">72dp</item>
+    </style>
+
+    <style name="ListLayoutStyle">
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+
+
+    <!-- App TextView content inside List. -->
+    <style name="TextViewStyle.Content.GameHistoryList">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:maxWidth">128dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+</resources>
