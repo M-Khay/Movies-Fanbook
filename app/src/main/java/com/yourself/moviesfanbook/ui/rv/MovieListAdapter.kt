@@ -1,30 +1,17 @@
 package com.yourself.moviesfanbook.ui.rv
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
-import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.yourself.moviesfanbook.data.Movie
 import com.yourself.moviesfanbook.databinding.MovieListItemBinding
+import com.yourself.moviesfanbook.ui.MovieListViewModel
 
 
-class MovieListAdapter:
-    PagedListAdapter<Movie,MovieListViewHolder>((DIFF_CALLBACK)) {
-    companion object {
-        private val DIFF_CALLBACK = object :
-            DiffUtil.ItemCallback<Movie>() {
-            // Concert details may have changed if reloaded from the database,
-            // but ID is fixed.
-            override fun areItemsTheSame(oldMovie: Movie,
-                                         newMovie: Movie) = oldMovie.imdbId == newMovie.imdbId
-
-            override fun areContentsTheSame(oldMovie: Movie,
-                                            newMovie: Movie) = oldMovie == newMovie
-        }
-    }
-
+class MovieListAdapter(var movieListViewModel: MovieListViewModel):
+    RecyclerView.Adapter<MovieListViewHolder>() {
     private var movieList = mutableListOf<Movie>()
+    private var totalListItem: Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListViewHolder {
         val teamListItemBinding =
@@ -34,6 +21,9 @@ class MovieListAdapter:
 
     override fun onBindViewHolder(holder: MovieListViewHolder, position: Int) {
         holder.setData(movieList[position])
+        holder.itemView.setOnClickListener {
+            movieListViewModel.setSelectedMovie(movieList[position])
+        }
     }
 
     override fun getItemCount(): Int {
@@ -41,10 +31,22 @@ class MovieListAdapter:
     }
 
     fun updateTeamList(movieList: List<Movie>) {
-        this.movieList = movieList.toMutableList()
-        notifyDataSetChanged()
+        this.movieList.addAll(this.movieList.size, movieList.toMutableList())
+        notifyItemRangeInserted(this.movieList.size - movieList.size, movieList.size)
     }
 
+    fun setTotalListItem(total: Int) {
+        totalListItem = total
+    }
+
+    fun getTotalListITem(): Int {
+        return totalListItem
+    }
+
+    fun clearLastSearchedItems() {
+        this.movieList.clear()
+        notifyDataSetChanged()
+    }
 
 
 }

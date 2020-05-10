@@ -24,7 +24,7 @@
 
             <ImageView
                 android:id="@+id/poster"
-                style="@style/PosterImageView"
+                style="@style/ListImageView"
                 bind:poster="@{movieDetails.poster}"
                 android:layout_alignParentEnd="true"
                 bind:layout_constraintBottom_toBottomOf="parent"

@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.yourself.moviesfanbook.R
+import com.yourself.moviesfanbook.data.Movie
 
 class MainActivity : AppCompatActivity(),ActionBarCallBack {
     private lateinit var toolbar: Toolbar
@@ -24,8 +26,20 @@ class MainActivity : AppCompatActivity(),ActionBarCallBack {
                 MovieListFragment.TAG
             ).commitNow()
 
+        val viewModel = ViewModelProvider(this).get(MovieListViewModel::class.java)
+        viewModel.selectedMovie.observe(this, teamSelectedObserver)
 
     }
+
+    private val teamSelectedObserver = Observer<Movie> {
+        it?.let {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, MovieDetailsFragment.newInstance())
+                .addToBackStack(null)
+                .commit()
+        }
+    }
+
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -43,7 +57,7 @@ class MainActivity : AppCompatActivity(),ActionBarCallBack {
         if(showBackButton) {
             toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_material)
         }else{
-            toolbar.setNavigationIcon(R.drawable.ic_launcher_background)
+            toolbar.setNavigationIcon(R.mipmap.ic_app_launcher_foreground)
         }
     }
 

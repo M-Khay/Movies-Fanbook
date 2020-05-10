@@ -10,7 +10,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:navigationIcon="@drawable/ic_launcher_background"
+        app:navigationIcon="@mipmap/ic_app_launcher_foreground"
+        android:paddingTop="4dp"
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
     </com.google.android.material.appbar.MaterialToolbar>

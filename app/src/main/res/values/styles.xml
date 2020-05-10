@@ -7,6 +7,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- App TextView Heading -->
+    <style name="TextViewStyle.Heading" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
     <!-- App TextView content -->
     <style name="TextViewStyle.Content" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:layout_marginLeft">16dp</item>
@@ -22,6 +27,7 @@
     <style name="TextViewStyle.Content.List">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">32dp</item>
+        <item name="android:layout_marginTop">8dp</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:maxWidth">260dp</item>
         <item name="singleLine">true</item>
@@ -45,14 +51,20 @@
         <item name="android:layout_marginEnd">16dp</item>
     </style>
 
-    <style name="PosterImageView">
-        <item name="android:layout_width">100dp</item>
-        <item name="android:layout_height">56dp</item>
+    <style name="ListImageView">
+        <item name="android:layout_width">64dp</item>
+        <item name="android:layout_height">64dp</item>
         <item name="android:layout_marginLeft">16dp</item>
         <item name="android:layout_marginRight">16dp</item>
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginBottom">8dp</item>
-
+    </style>
+    <style name="PosterImageView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
     </style>
 
     <style name="ListCardStyle">

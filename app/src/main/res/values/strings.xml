@@ -1,13 +1,8 @@
 <resources>
-    <string name="app_name">Sports Fanbook</string>
-    <string name="search_hint">Search Your Team</string>
-    <string name="empty_team_name">Team Name Cannot Be Empty</string>
-    <string name="invalid_team_name">Invalid Team Name</string>
+    <string name="app_name">Movies Fanbook</string>
+    <string name="search_hint">Movie Name</string>
+    <string name="empty_movie_name">Movie Name Cannot Be Empty</string>
     <string name="search">Search</string>
-    <string name="match_history">Match History</string>
-    <string name="team_name_very_long">Golden State Warriors and Los Angeles Laker</string>
-    <string name="team_score_very_long">2002-42</string>
-    <string name="team_vs_text">VS</string>
 
     <string name="match_history_error">Sorry!</string>
     <string name="no_match_history_found">We could not retrieve any game history for this team. Please try again later.</string>
@@ -17,8 +12,8 @@
     <string name="network_error_title">Network Issue</string>
     <string name="network_error_message">Internet not available, please check your connection.</string>
 
-    <string name="premium_feature_title">Premium Feature!!</string>
-    <string name="premium_feature_message">Coming soon</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
