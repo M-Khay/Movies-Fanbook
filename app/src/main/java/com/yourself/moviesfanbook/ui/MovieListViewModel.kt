@@ -20,7 +20,9 @@ class MovieListViewModel : ViewModel() {
 
     var movieListState = MutableLiveData<ApiResult<List<Movie>>>()
     var selectedMovie = MutableLiveData<Movie>()
-    var movieDetails = MutableLiveData<ApiResult<MovieDetails>>()
+
+    var movieDetailState = MutableLiveData<ApiResult<MovieDetails>>()
+    lateinit var movieDetails : MovieDetails
 
     init {
         movieListState.value =
@@ -67,12 +69,12 @@ class MovieListViewModel : ViewModel() {
 //        return selectedMovie.value
 //    }
 
-    fun getMovieDetails() {
+    fun fetchMovieDetails() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val result = repository.getMovieDetailsFor(selectedMovie.value!!.title)
                 withContext(Dispatchers.Main) {
-                    movieDetails.value = Success(result, null, false)
+                    movieDetailState.value = Success(result, null, false)
                 }
             } catch (exception: Exception) {
                 Log.d(TAG, "Error from API ${exception.localizedMessage}")
@@ -84,4 +86,6 @@ class MovieListViewModel : ViewModel() {
         }
 
     }
+
+
 }

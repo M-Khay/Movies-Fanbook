@@ -17,12 +17,12 @@ data class MovieDetails(
 ) {
     companion object {
         @JvmStatic
-        @BindingAdapter("poster")
+        @BindingAdapter("imageView")
         fun loadImage(imageView: ImageView, poster: String) {
             Glide.with(imageView.context)
                 .setDefaultRequestOptions(
                     RequestOptions()
-                        .circleCrop()
+                        .fitCenter()
                 ).load(poster)
                 .placeholder(R.mipmap.ic_default_placeholder_round)
                 .into(imageView)

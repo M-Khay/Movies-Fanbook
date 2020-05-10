@@ -5,25 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.yourself.moviesfanbook.R
-import com.yourself.moviesfanbook.data.Movie
-import com.yourself.moviesfanbook.data.MovieDetails
 import com.yourself.moviesfanbook.databinding.FragmentMovieDetailsBinding
-import com.yourself.moviesfanbook.repository.ApiResult
-import com.yourself.moviesfanbook.repository.Error
-import com.yourself.moviesfanbook.repository.Loading
-import com.yourself.moviesfanbook.repository.Success
-import kotlinx.android.synthetic.main.fragment_movie_list.*
 
 class MovieDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentMovieDetailsBinding
-    private lateinit var actionBarListener :ActionBarCallBack
+    private lateinit var actionBarListener: ActionBarCallBack
+    private lateinit var viewModel: MovieListViewModel
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is ActionBarCallBack) {
@@ -45,10 +37,9 @@ class MovieDetailsFragment : Fragment() {
             container,
             false
         )
-        val viewModel = ViewModelProvider(requireActivity()).get(MovieListViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(MovieListViewModel::class.java)
         binding.lifecycleOwner = this
-        viewModel.getMovieDetails()
-        viewModel.movieDetails.observe(this.viewLifecycleOwner, teamListObserver)
+        binding.movieDetails = viewModel.movieDetails
         return binding.root
     }
 
@@ -59,19 +50,8 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        actionBarListener.showHideActionBarWith("d",true)
+        actionBarListener.showHideActionBarWith(viewModel.selectedMovie.value?.title, true)
     }
 
-    private val teamListObserver = Observer<ApiResult<MovieDetails>> { state ->
-        when (state) {
-            is Success<MovieDetails> -> {
-                binding.movieDetails = state.data
-            }
-            is Loading -> {
-            }
-            is Error -> {
-            }
-        }
-    }
 
 }

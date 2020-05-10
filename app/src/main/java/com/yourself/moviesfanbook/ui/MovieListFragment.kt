@@ -41,8 +41,7 @@ class MovieListFragment : Fragment() {
 
     private lateinit var viewModel: MovieListViewModel
     private lateinit var adapter: MovieListAdapter
-
-    private val  mlayoutManager = LinearLayoutManager(activity)
+    private var mLayoutManager = LinearLayoutManager(context)
     private lateinit var actionBarListener: ActionBarCallBack
 
     override fun onAttach(context: Context) {
@@ -54,7 +53,11 @@ class MovieListFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_movie_list, container, false)
     }
 
@@ -79,7 +82,8 @@ class MovieListFragment : Fragment() {
 
         adapter = MovieListAdapter(viewModel)
         rv_dictionary_list.apply {
-            layoutManager = mlayoutManager
+            if (rv_dictionary_list.layoutManager == null)
+                layoutManager = mLayoutManager
             adapter = this@MovieListFragment.adapter
             rv_dictionary_list.addOnScrollListener(onScrollListener)
         }
@@ -93,13 +97,13 @@ class MovieListFragment : Fragment() {
 
     }
 
-
-    private val onScrollListener = object : EndlessRecyclerViewScrollListener(mlayoutManager) {
+    private val onScrollListener = object : EndlessRecyclerViewScrollListener(mLayoutManager) {
         override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
             // Triggered only when new data needs to be appended to the list
             searchMoreMovieList(page)
         }
     }
+
     override fun onResume() {
         super.onResume()
         actionBarListener.showHideActionBarWith(resources.getString(R.string.app_name), false)
@@ -130,7 +134,7 @@ class MovieListFragment : Fragment() {
     }
 
     private fun searchMoreMovieList(pageNumber: Int) {
-        if(adapter.itemCount < adapter.getTotalListITem()) {
+        if (adapter.itemCount < adapter.getTotalListITem()) {
             val searchText = search_text.text.toString()
             if (NetworkConnectivity.isNetworkConnected) {
                 viewModel.getMovieListFor(searchText, pageNumber)
@@ -184,6 +188,5 @@ class MovieListFragment : Fragment() {
             activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         keyboard.hideSoftInputFromWindow(view?.windowToken, 0)
     }
-
 
 }

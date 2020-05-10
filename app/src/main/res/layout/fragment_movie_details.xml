@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -10,15 +10,15 @@
             type="com.yourself.moviesfanbook.data.MovieDetails" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/poster"
             style="@style/PosterImageView"
-            bind:poster="@{movieDetails.poster}"
             android:layout_alignParentEnd="true"
+            bind:imageView="@{movieDetails.poster}"
             bind:layout_constraintEnd_toEndOf="parent"
             bind:layout_constraintStart_toStartOf="parent"
             bind:layout_constraintTop_toTopOf="parent" />
@@ -26,21 +26,34 @@
 
         <TextView
             android:id="@+id/director"
-            android:layout_height="wrap_content"
-            android:text="@{movieDetails.director}"
             android:layout_width="wrap_content"
+            style="@style/TextViewStyle.Content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@{`Director: `+movieDetails.director}"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/poster" />
 
         <TextView
             android:id="@+id/year"
             style="@style/TextViewStyle.Content"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="@{movieDetails.year}"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@{`year : `+movieDetails.year}"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/poster" />
 
+        <TextView
+            android:id="@+id/plot"
+            style="@style/TextViewStyle.Content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@{movieDetails.plot}"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/year" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
