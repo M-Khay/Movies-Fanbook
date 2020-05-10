@@ -41,7 +41,7 @@ class MovieListFragment : Fragment() {
 
     private lateinit var viewModel: MovieListViewModel
     private lateinit var adapter: MovieListAdapter
-    private var mLayoutManager = LinearLayoutManager(context)
+    private lateinit var onScrollListener : EndlessRecyclerViewScrollListener
     private lateinit var actionBarListener: ActionBarCallBack
 
     override fun onAttach(context: Context) {
@@ -82,10 +82,8 @@ class MovieListFragment : Fragment() {
 
         adapter = MovieListAdapter(viewModel)
         rv_dictionary_list.apply {
-            if (rv_dictionary_list.layoutManager == null)
-                layoutManager = mLayoutManager
+            layoutManager = LinearLayoutManager(activity)
             adapter = this@MovieListFragment.adapter
-            rv_dictionary_list.addOnScrollListener(onScrollListener)
         }
 
         rv_dictionary_list.addItemDecoration(
@@ -94,15 +92,17 @@ class MovieListFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
-
-    }
-
-    private val onScrollListener = object : EndlessRecyclerViewScrollListener(mLayoutManager) {
-        override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
-            // Triggered only when new data needs to be appended to the list
-            searchMoreMovieList(page)
+        onScrollListener = object : EndlessRecyclerViewScrollListener(rv_dictionary_list.layoutManager as LinearLayoutManager?) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+                // Triggered only when new data needs to be appended to the list
+                searchMoreMovieList(page)
+            }
         }
+        rv_dictionary_list.addOnScrollListener(onScrollListener)
+
     }
+
+
 
     override fun onResume() {
         super.onResume()
