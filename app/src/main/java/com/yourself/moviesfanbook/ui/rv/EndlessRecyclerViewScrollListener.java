@@ -3,6 +3,12 @@ package com.yourself.moviesfanbook.ui.rv;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+/*
+Reference:-
+https://github.com/codepath/android_guides/wiki/Endless-Scrolling-with-AdapterViews-and-RecyclerView
+ */
+
 public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnScrollListener {
     // The minimum amount of items to have below your current scroll position
     // before loading more.
@@ -28,8 +34,7 @@ public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnS
         for (int i = 0; i < lastVisibleItemPositions.length; i++) {
             if (i == 0) {
                 maxSize = lastVisibleItemPositions[i];
-            }
-            else if (lastVisibleItemPositions[i] > maxSize) {
+            } else if (lastVisibleItemPositions[i] > maxSize) {
                 maxSize = lastVisibleItemPositions[i];
             }
         }
@@ -44,7 +49,7 @@ public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnS
         int lastVisibleItemPosition = 0;
         int totalItemCount = mLayoutManager.getItemCount();
 
-            lastVisibleItemPosition = ((LinearLayoutManager) mLayoutManager).findLastVisibleItemPosition();
+        lastVisibleItemPosition = ((LinearLayoutManager) mLayoutManager).findLastVisibleItemPosition();
 
         // If the total item count is zero and the previous isn't, assume the
         // list is invalidated and should be reset back to initial state
