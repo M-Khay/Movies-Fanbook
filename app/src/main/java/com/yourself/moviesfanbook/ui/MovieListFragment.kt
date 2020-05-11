@@ -25,6 +25,7 @@ import com.yourself.moviesfanbook.repository.Loading
 import com.yourself.moviesfanbook.repository.Success
 import com.yourself.moviesfanbook.ui.rv.EndlessRecyclerViewScrollListener
 import com.yourself.moviesfanbook.ui.rv.MovieListAdapter
+import com.yourself.moviesfanbook.utils.Constant.MOVIES_PER_PAGE
 import com.yourself.searchyourcityweather.utils.NetworkConnectivity
 import kotlinx.android.synthetic.main.fragment_movie_list.*
 
@@ -32,6 +33,7 @@ class MovieListFragment : Fragment() {
 
     companion object {
         val TAG = MovieListFragment::class.java.name
+
         @JvmStatic
         fun newInstance() = MovieListFragment()
     }
@@ -124,7 +126,9 @@ class MovieListFragment : Fragment() {
                 viewModel.getMovieListFor(searchText)
                 Log.d(TAG, "Searched Team : $searchText")
             } else {
-                showAlertDialog(resources.getString(R.string.network_error_title), resources.getString(R.string.network_error_message),
+                showAlertDialog(
+                    resources.getString(R.string.network_error_title),
+                    resources.getString(R.string.network_error_message),
                     resources.getString(R.string.alert_dialog_ok)
                 )
             }
@@ -142,7 +146,7 @@ class MovieListFragment : Fragment() {
     }
 
     private fun searchMoreMovieList(pageNumber: Int) {
-        if (adapter.itemCount < adapter.getTotalListITem()) {
+        if ((pageNumber * MOVIES_PER_PAGE)< adapter.getTotalListITem()) {
             val searchText = search_text.text.toString()
             if (NetworkConnectivity.isNetworkConnected) {
                 viewModel.getMovieListFor(searchText, pageNumber)

@@ -86,7 +86,7 @@ class MovieDetailsFragment : Fragment() {
     private fun showMoveDetails(movieDetails: MovieDetails) {
         director.text = "Director : " + movieDetails.director
         year.text = "Year : " + movieDetails.year
-        plot.text = movieDetails.plot
+        plot.text = "Plot :- \n \n" +movieDetails.plot
         Glide.with(poster.context)
             .setDefaultRequestOptions(
                 RequestOptions()

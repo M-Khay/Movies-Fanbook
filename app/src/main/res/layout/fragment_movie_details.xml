@@ -1,68 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/tools">
+    xmlns:bind="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main_content"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/poster"
-            style="@style/PosterImageView"
-            android:layout_alignParentEnd="true"
-            android:background="@android:color/black"
-            bind:layout_constraintEnd_toEndOf="parent"
-            bind:layout_constraintStart_toStartOf="parent"
-            bind:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/director"
-            android:layout_width="wrap_content"
-            style="@style/TextViewStyle.Content"
-            android:layout_height="wrap_content"
-            android:text="Director"
-            android:layout_marginTop="16dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/poster" />
-
-        <TextView
-            android:id="@+id/year"
-            style="@style/TextViewStyle.Content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Year"
-            android:layout_marginTop="16dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/poster" />
-
-        <TextView
-            android:id="@+id/plot"
-            style="@style/TextViewStyle.Content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/director" />
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/poster"
+                style="@style/PosterImageView"
+                android:layout_alignParentEnd="true"
+                android:background="@android:color/black"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toTopOf="parent" />
 
 
+            <TextView
+                android:id="@+id/director"
+                style="@style/TextViewStyle.Content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Director"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/poster" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/year"
+                style="@style/TextViewStyle.Content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Year"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/poster" />
+
+            <TextView
+                android:id="@+id/plot"
+                style="@style/TextViewStyle.Content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/director" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <ProgressBar
         android:id="@+id/loading_content"
         style="?android:progressBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-       android:layout_centerInParent="true"
-   />
-
+        android:layout_centerInParent="true"
+        android:layout_gravity="center" />
 
 
 </RelativeLayout>
