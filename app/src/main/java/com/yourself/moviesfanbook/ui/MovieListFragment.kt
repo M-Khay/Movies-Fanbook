@@ -41,8 +41,11 @@ class MovieListFragment : Fragment() {
 
     private lateinit var viewModel: MovieViewModel
     private lateinit var adapter: MovieListAdapter
-    private lateinit var onScrollListener : EndlessRecyclerViewScrollListener
+    private lateinit var onScrollListener: EndlessRecyclerViewScrollListener
     private lateinit var actionBarListener: ActionBarCallBack
+
+    private var movieList = mutableSetOf<Movie>()
+    private var lastPageFetched: Int = 0
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -81,27 +84,30 @@ class MovieListFragment : Fragment() {
         }
 
         adapter = MovieListAdapter(viewModel)
-        rv_dictionary_list.apply {
+        rv_movie_list.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = this@MovieListFragment.adapter
         }
 
-        rv_dictionary_list.addItemDecoration(
+        rv_movie_list.addItemDecoration(
             DividerItemDecoration(
-                rv_dictionary_list.context,
+                rv_movie_list.context,
                 DividerItemDecoration.VERTICAL
             )
         )
-        onScrollListener = object : EndlessRecyclerViewScrollListener(rv_dictionary_list.layoutManager as LinearLayoutManager?) {
+        onScrollListener = object :
+            EndlessRecyclerViewScrollListener(rv_movie_list.layoutManager as LinearLayoutManager?) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
                 // Triggered only when new data needs to be appended to the list
-                searchMoreMovieList(page)
+                if (lastPageFetched < page) {
+                    lastPageFetched++
+                    searchMoreMovieList(page)
+                }
             }
         }
-        rv_dictionary_list.addOnScrollListener(onScrollListener)
+        rv_movie_list.addOnScrollListener(onScrollListener)
 
     }
-
 
 
     override fun onResume() {
@@ -112,7 +118,9 @@ class MovieListFragment : Fragment() {
 
     private fun searchMovie() {
         hideKeyboard()
+        movieList.clear()
         adapter.clearLastSearchedItems()
+        lastPageFetched = 0
         onScrollListener.resetState()
         val searchText = search_text.text.toString()
         if (TextUtils.isEmpty(searchText)) {
@@ -155,16 +163,23 @@ class MovieListFragment : Fragment() {
             is Success<List<Movie>> -> {
                 loading_content.visibility = View.GONE
                 api_error_response.visibility = View.GONE
-                rv_dictionary_list.visibility = View.VISIBLE
-                adapter.updateTeamList(state.data)
+                rv_movie_list.visibility = View.VISIBLE
+                if (!movieList.containsAll(state.data)) {
+                    adapter.updateTeamList(state.data)
+                    movieList.addAll(state.data)
+                }else{
+                    adapter.updateTeamList(movieList.toMutableList())
+                }
+
                 adapter.setTotalListItem(state.totalListItem!!)
             }
-            is Loading -> { api_error_response.visibility = View.GONE
+            is Loading -> {
+                api_error_response.visibility = View.GONE
                 loading_content.visibility = View.VISIBLE
             }
             is Error -> {
                 loading_content.visibility = View.GONE
-                rv_dictionary_list.visibility = View.GONE
+                rv_movie_list.visibility = View.GONE
                 api_error_response.text = state.apiErrorMessage ?: state.exception.toString()
                 api_error_response.visibility = View.VISIBLE
             }
