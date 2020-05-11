@@ -32,11 +32,9 @@ class MovieListFragment : Fragment() {
 
     companion object {
         val TAG = MovieListFragment::class.java.name
-
         @JvmStatic
         fun newInstance() = MovieListFragment()
     }
-
 
     private lateinit var viewModel: MovieViewModel
     private lateinit var adapter: MovieListAdapter
