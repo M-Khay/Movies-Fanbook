@@ -14,7 +14,7 @@
             android:id="@+id/poster"
             style="@style/PosterImageView"
             android:layout_alignParentEnd="true"
-            android:background="@color/ic_default_placeholder_background"
+            android:background="@android:color/black"
             bind:layout_constraintEnd_toEndOf="parent"
             bind:layout_constraintStart_toStartOf="parent"
             bind:layout_constraintTop_toTopOf="parent" />
