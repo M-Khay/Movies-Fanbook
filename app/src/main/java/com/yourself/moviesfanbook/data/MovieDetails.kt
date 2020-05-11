@@ -9,11 +9,11 @@ import com.yourself.moviesfanbook.R
 
 
 data class MovieDetails(
-    @SerializedName("Title") var title: String,
-    @SerializedName("Poster") var poster: String,
-    @SerializedName("Year") var year: String,
-    @SerializedName("Director") var director: String,
-    @SerializedName("Plot") var plot: String
+    @SerializedName("Title") var title: String?,
+    @SerializedName("Poster") var poster: String?,
+    @SerializedName("Year") var year: String?,
+    @SerializedName("Director") var director: String?,
+    @SerializedName("Plot") var plot: String?
 ) {
     companion object {
         @JvmStatic

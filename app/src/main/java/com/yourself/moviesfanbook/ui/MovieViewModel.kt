@@ -12,8 +12,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class MovieListViewModel : ViewModel() {
-    private val TAG = MovieListViewModel::class.java.name
+class MovieViewModel : ViewModel() {
+    private val TAG = MovieViewModel::class.java.name
 
     @Inject
     lateinit var repository: MovieRepository
@@ -22,7 +22,6 @@ class MovieListViewModel : ViewModel() {
     var selectedMovie = MutableLiveData<Movie>()
 
     var movieDetailState = MutableLiveData<ApiResult<MovieDetails>>()
-    lateinit var movieDetails : MovieDetails
 
     init {
         movieListState.value =
@@ -30,8 +29,7 @@ class MovieListViewModel : ViewModel() {
     }
 
     fun getMovieListFor(movieName: String, pageNumber: Int = 1) {
-        if (pageNumber == 1)
-            movieListState.value = Loading(true)
+        movieListState.value = Loading(true)
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val result = repository.getMovieListWith(movieName, pageNumber)
@@ -70,6 +68,7 @@ class MovieListViewModel : ViewModel() {
 //    }
 
     fun fetchMovieDetails() {
+        movieDetailState.value = Loading(true)
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val result = repository.getMovieDetailsFor(selectedMovie.value!!.title)

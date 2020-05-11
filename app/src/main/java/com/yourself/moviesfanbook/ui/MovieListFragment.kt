@@ -39,7 +39,7 @@ class MovieListFragment : Fragment() {
     }
 
 
-    private lateinit var viewModel: MovieListViewModel
+    private lateinit var viewModel: MovieViewModel
     private lateinit var adapter: MovieListAdapter
     private lateinit var onScrollListener : EndlessRecyclerViewScrollListener
     private lateinit var actionBarListener: ActionBarCallBack
@@ -63,7 +63,7 @@ class MovieListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity()).get(MovieListViewModel::class.java).also {
+        viewModel = ViewModelProvider(requireActivity()).get(MovieViewModel::class.java).also {
             ComponentInjector.component.inject(it)
         }
 
@@ -159,9 +159,7 @@ class MovieListFragment : Fragment() {
                 adapter.updateTeamList(state.data)
                 adapter.setTotalListItem(state.totalListItem!!)
             }
-            is Loading -> {
-                rv_dictionary_list.visibility = View.GONE
-                api_error_response.visibility = View.GONE
+            is Loading -> { api_error_response.visibility = View.GONE
                 loading_content.visibility = View.VISIBLE
             }
             is Error -> {

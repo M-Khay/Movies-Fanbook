@@ -8,15 +8,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.yourself.moviesfanbook.R
 import com.yourself.moviesfanbook.data.Movie
-import com.yourself.moviesfanbook.data.MovieDetails
-import com.yourself.moviesfanbook.repository.ApiResult
-import com.yourself.moviesfanbook.repository.Error
-import com.yourself.moviesfanbook.repository.Loading
-import com.yourself.moviesfanbook.repository.Success
 
 class MainActivity : AppCompatActivity(),ActionBarCallBack {
     private lateinit var toolbar: Toolbar
-    private lateinit var viewModel: MovieListViewModel
+    private lateinit var viewModel: MovieViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,35 +27,20 @@ class MainActivity : AppCompatActivity(),ActionBarCallBack {
                 MovieListFragment.TAG
             ).commitNow()
 
-        viewModel = ViewModelProvider(this).get(MovieListViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
         viewModel.selectedMovie.observe(this, teamSelectedObserver)
-        viewModel.movieDetailState.observe(this, movieDetailsStateObserver)
 
     }
 
     private val teamSelectedObserver = Observer<Movie> {
         it?.let {
-            viewModel.fetchMovieDetails()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, MovieDetailsFragment.newInstance())
+                .addToBackStack(null)
+                .commit()
         }
     }
 
-    private val movieDetailsStateObserver = Observer<ApiResult<MovieDetails>> { state ->
-        when (state) {
-            is Success<MovieDetails> -> {
-                viewModel.movieDetails = state.data
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, MovieDetailsFragment.newInstance())
-                    .addToBackStack(null)
-                    .commit()
-            }
-            is Loading -> {
-
-            }
-            is Error -> {
-
-            }
-        }
-    }
 
 
 

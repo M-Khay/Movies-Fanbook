@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.yourself.moviesfanbook.data.Movie
 import com.yourself.moviesfanbook.databinding.MovieListItemBinding
-import com.yourself.moviesfanbook.ui.MovieListViewModel
+import com.yourself.moviesfanbook.ui.MovieViewModel
 
 
-class MovieListAdapter(var movieListViewModel: MovieListViewModel):
+class MovieListAdapter(var movieListViewModel: MovieViewModel):
     RecyclerView.Adapter<MovieListViewHolder>() {
     private var movieList = mutableListOf<Movie>()
     private var totalListItem: Int = 0

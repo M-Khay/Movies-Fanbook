@@ -3,7 +3,7 @@ package com.yourself.searchyourcityweather.di
 import com.yourself.moviesfanbook.di.AppModule
 import com.yourself.moviesfanbook.di.MovieRepositoryModule
 import com.yourself.moviesfanbook.di.NetworkModule
-import com.yourself.moviesfanbook.ui.MovieListViewModel
+import com.yourself.moviesfanbook.ui.MovieViewModel
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
@@ -16,7 +16,7 @@ import javax.inject.Singleton
 )
 
 interface AppComponent {
-    fun inject(movieListViewModel: MovieListViewModel)
+    fun inject(movieListViewModel: MovieViewModel)
 }
 
 
