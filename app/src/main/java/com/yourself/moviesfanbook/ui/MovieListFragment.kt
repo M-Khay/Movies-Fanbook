@@ -120,7 +120,7 @@ class MovieListFragment : Fragment() {
         clearPreviousSearchedData()
         val searchText = search_text.text.toString()
 
-        if (!searchText.isNullOrEmpty()) {
+        if (searchText.isNotEmpty()) {
             input_layout.error = ""
             if (NetworkConnectivity.isNetworkConnected) {
                 viewModel.getMovieListFor(searchText)
