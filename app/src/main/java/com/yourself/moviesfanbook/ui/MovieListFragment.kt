@@ -183,6 +183,7 @@ class MovieListFragment : Fragment() {
                 loading_content.visibility = View.GONE
                 rv_movie_list.visibility = View.GONE
                 api_error_response.text = state.apiErrorMessage ?: state.exception.toString()
+                input_layout.error = "Re-Enter Search Term"
                 api_error_response.visibility = View.VISIBLE
             }
         }
