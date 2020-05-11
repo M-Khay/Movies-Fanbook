@@ -2,7 +2,6 @@ package com.yourself.moviesfanbook.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -100,7 +99,7 @@ class MovieListFragment : Fragment() {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
                 // Triggered only when new data needs to be appended to the list
                 if (lastPageFetched < page) {
-                    lastPageFetched++
+                    lastPageFetched = page
                     searchMoreMovieList(page)
                 }
             }
@@ -118,27 +117,30 @@ class MovieListFragment : Fragment() {
 
     private fun searchMovie() {
         hideKeyboard()
-        movieList.clear()
-        adapter.clearLastSearchedItems()
-        lastPageFetched = 0
-        onScrollListener.resetState()
+        clearPreviousSearchedData()
         val searchText = search_text.text.toString()
-        if (TextUtils.isEmpty(searchText)) {
-            input_layout.error = resources.getString(R.string.empty_movie_name)
-            Toast.makeText(activity, "Search Term Cannot be empty", Toast.LENGTH_LONG).show()
-        } else {
+
+        if (!searchText.isNullOrEmpty()) {
             input_layout.error = ""
             if (NetworkConnectivity.isNetworkConnected) {
                 viewModel.getMovieListFor(searchText)
                 Log.d(TAG, "Searched Team : $searchText")
             } else {
-                showAlertDialog(
-                    resources.getString(R.string.network_error_title),
-                    resources.getString(R.string.network_error_message),
+                showAlertDialog(resources.getString(R.string.network_error_title), resources.getString(R.string.network_error_message),
                     resources.getString(R.string.alert_dialog_ok)
                 )
             }
+        } else {
+            input_layout.error = resources.getString(R.string.empty_movie_name)
+            Toast.makeText(activity, "Search Term Cannot be empty", Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun clearPreviousSearchedData() {
+        adapter.clearLastSearchedItems()
+        movieList.clear()
+        lastPageFetched = 0
+        onScrollListener.resetState()
     }
 
     private fun searchMoreMovieList(pageNumber: Int) {
@@ -157,7 +159,6 @@ class MovieListFragment : Fragment() {
         }
     }
 
-
     private val teamListObserver = Observer<ApiResult<List<Movie>>> { state ->
         when (state) {
             is Success<List<Movie>> -> {
@@ -167,10 +168,9 @@ class MovieListFragment : Fragment() {
                 if (!movieList.containsAll(state.data)) {
                     adapter.updateTeamList(state.data)
                     movieList.addAll(state.data)
-                }else{
+                } else {
                     adapter.updateTeamList(movieList.toMutableList())
                 }
-
                 adapter.setTotalListItem(state.totalListItem!!)
             }
             is Loading -> {
