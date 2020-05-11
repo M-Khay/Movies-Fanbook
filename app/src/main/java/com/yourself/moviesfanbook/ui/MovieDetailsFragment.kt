@@ -92,7 +92,6 @@ class MovieDetailsFragment : Fragment() {
                 RequestOptions()
                     .fitCenter()
             ).load(movieDetails.poster)
-            .placeholder(R.mipmap.ic_default_placeholder_round)
             .into(poster)
 
     }
